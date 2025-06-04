@@ -1,11 +1,16 @@
+import { useState } from "react";
 import { useAppStore } from "../stores/useAppStore";
-import AttendanceCharts from "./AttendanceCharts";
+import AttendanceCharts from "./charts/AttendanceCharts";
 
 export default function AssistanceForm() {
   const { men, women, children, total, setMen, setWomen, setChildren } = useAppStore();
+  const [showCharts, setShowCharts] = useState(false);
 
   const handleSubmit = (e : React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault()
+    e.preventDefault();
+    if (total > 0) {
+      setShowCharts(true);
+    }
   }
 
   const calculatePercentageOfPeople = (value: number, total: number) => {
@@ -101,15 +106,16 @@ export default function AssistanceForm() {
 
           <button
             type="submit"
-            className="w-full mt-4 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition duration-300 cursor-pointer font-semibold"
+            className="w-full mt-4 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition duration-300 cursor-pointer font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={handleSubmit}
+            disabled={total === 0}
           >
             Add Registration
           </button>
         </form>
       </div>
       
-      <AttendanceCharts />
+      {showCharts && <AttendanceCharts />}
     </div>
   );
 }
