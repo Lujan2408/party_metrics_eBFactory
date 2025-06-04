@@ -31,7 +31,7 @@ export default function AssistanceForm() {
 
   return (
     <>
-      <div className="h-full p-6 bg-white rounded-2xl shadow-xl border border-gray-200">
+      <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-6">
         <h2 className="text-2xl font-bold text-center text-indigo-600 mb-2">
           Attendee Registration
         </h2>

@@ -15,18 +15,20 @@ function App() {
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Left Column - Forms Container */}
-          <div className="w-full lg:w-1/2 flex flex-col md:flex-row gap-6">
-            <div className="flex-1">
-              <AssistanceForm />
-            </div>
-            <div className="flex-1">
-              <ExpenseForm />
+          <div className="w-full lg:w-1/2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 auto-rows-min">
+              <div className="h-auto">
+                <AssistanceForm />
+              </div>
+              <div className="h-auto">
+                <ExpenseForm />
+              </div>
             </div>
           </div>
 
           {/* Right Column - Charts Container */}
-          <div className="w-full lg:w-1/2 lg:sticky lg:top-8">
-            <div id="charts-container" className="w-full">
+          <div className="w-full lg:w-1/2">
+            <div id="charts-container" className="space-y-6">
               {/* Charts will be rendered here */}
             </div>
           </div>
