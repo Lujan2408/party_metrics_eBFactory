@@ -1,6 +1,6 @@
 export default function ExpenseForm() {
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-2xl shadow-xl">
+    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-2xl shadow-xl border border-gray-200">
       <h2 className="text-2xl font-bold text-center text-indigo-600 mb-2">
         Expense Registration
       </h2>
@@ -48,7 +48,7 @@ export default function ExpenseForm() {
           type="submit"
           className="w-full mt-4 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition duration-300 cursor-pointer font-bold"
         >
-          Send Registration
+          Add Expense
         </button>
       </form>
     </div>
