@@ -1,9 +1,10 @@
 export default function AssistanceForm() {
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-2xl shadow-xl">
-      <h2 className="text-2xl font-bold text-center text-indigo-600 mb-6">
+      <h2 className="text-2xl font-bold text-center text-indigo-600 mb-2">
         Attendee Registration
       </h2>
+      <p className="text-center text-gray-500 mb-6">Enter the number of attendees by category</p>
 
       <form className="space-y-4">
         <div>
