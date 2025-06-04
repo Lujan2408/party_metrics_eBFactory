@@ -1,8 +1,10 @@
+import AssistanceForm from "./components/AssistanceForm"
+
 function App() {
 
   return (
     <>
-      <h1>Hello World</h1>
+      <AssistanceForm />
     </>
   )
 }
