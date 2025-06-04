@@ -74,7 +74,6 @@ export default function ExpenseForm() {
               className="w-full pl-7 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="0"
               min="0"
-              step="1000"
               required
             />
           </div>
@@ -119,7 +118,7 @@ export default function ExpenseForm() {
 
         <button
           type="submit"
-          className="w-full mt-6 bg-indigo-600 text-white py-2.5 rounded-lg hover:bg-indigo-700 transition duration-300 cursor-pointer font-bold"
+          className="w-full mt-6 bg-indigo-600 text-white py-2.5 rounded-lg hover:bg-indigo-700 transition duration-300 cursor-pointer font-semibold"
         >
           Add Expense
         </button>

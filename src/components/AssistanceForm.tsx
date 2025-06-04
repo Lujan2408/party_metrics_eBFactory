@@ -89,7 +89,7 @@ export default function AssistanceForm() {
 
         <button
           type="submit"
-          className="w-full mt-4 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition duration-300 cursor-pointer font-bold"
+          className="w-full mt-4 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition duration-300 cursor-pointer font-semibold"
           onClick={handleSubmit}
         >
           Add Registration

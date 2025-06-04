@@ -4,7 +4,7 @@ import ExpenseForm from "./components/ExpenseForm"
 function App() {
   return (
     <main>
-      <div className="flex flex-col items-center justify-center min-h-screen bg-sky-50 ">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 ">
         <h1 className="text-2xl font-bold text-center">
           Party Management System
         </h1>
