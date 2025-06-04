@@ -1,28 +1,25 @@
-import { useState, type FormEvent } from "react"
 import { useAppStore } from "../stores/useAppStore"
 import { formatCurrency } from "../helpers/formatCurrency"
+import { useForm } from "react-hook-form"
+import Error from "./Error"
+
+type FormInputs = {
+  category: string;
+  amount: string;
+}
 
 export default function ExpenseForm() {
-  // 1. Obtenemos las funciones y datos del store
+  // Get the state and functions from the store
   const addExpense = useAppStore((state) => state.addExpense)
   const totalExpenses = useAppStore((state) => state.totalExpenses)
   const expensesByCategory = useAppStore((state) => state.expensesByCategory)
 
-  // 2. Estado local para el formulario
-  const [category, setCategory] = useState("")
-  const [amount, setAmount] = useState("")
+  // Validate with react-hook-form
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<FormInputs>()
 
-  // 3. Manejador del formulario
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    
-    // Validaciones
-    // TODO : Validate with react-hook-form
-
-    // Añadir gasto y limpiar formulario
-    addExpense(category.trim(), parseFloat(amount))
-    setCategory("")
-    setAmount("")
+  const onSubmit = (data: FormInputs) => {
+    addExpense(data.category.trim(), parseFloat(data.amount))
+    reset()
   }
 
   return (
@@ -34,7 +31,7 @@ export default function ExpenseForm() {
         Enter the expenses by Category
       </p>
 
-      <form className="space-y-4" onSubmit={handleSubmit}>
+      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label
             htmlFor="category"
@@ -44,14 +41,14 @@ export default function ExpenseForm() {
           </label>
           <input
             type="text"
-            name="category"
             id="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
             className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="Ej. Food, Drinks, etc."
-            required
+            {...register("category", {
+              required: 'The category is required'
+            })}
           />
+          {errors.category && <Error>{errors.category.message}</Error>}
         </div>
 
         <div>
@@ -67,19 +64,20 @@ export default function ExpenseForm() {
             </div>
             <input
               type="number"
-              name="amount"
               id="amount"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
               className="w-full pl-7 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="0"
-              min="0"
-              required
+              {...register("amount", {
+                required: 'The amount is required',
+                min: { value: 0.01, message: 'Amount must be greater than 0' },
+                validate: (value) => parseFloat(value) > 0 || 'Amount must be greater than 0'
+              })}
             />
           </div>
+          {errors.amount && <Error>{errors.amount.message}</Error>}
         </div>
 
-        {/* Resumen de gastos */}
+        {/* Expenses summary */}
         <div className="mt-6 p-4 bg-gray-50 rounded-xl space-y-3">
           <div className="flex justify-between items-center border-b border-gray-200 pb-2">
             <span className="text-sm font-medium text-gray-600">
