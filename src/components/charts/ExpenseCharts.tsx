@@ -3,19 +3,11 @@ import HighchartsReact from 'highcharts-react-official';
 import { useAppStore } from '../../stores/useAppStore';
 import { formatCurrency } from '../../helpers/formatCurrency';
 
-// Types for chart options
-type ChartPoint = {
-  value: number;
-  color: string;
-  series: {
-    name: string;
-  };
-  y: number;
-}
-
-type ChartContext = {
-  value: number;
-}
+// Types for Highcharts formatters
+type AxisFormatterContext = {
+  value: number | string;
+  axis?: Highcharts.Axis;
+};
 
 export default function ExpenseCharts() {
   const { expensesByCategory, totalExpenses } = useAppStore();
@@ -114,19 +106,17 @@ export default function ExpenseCharts() {
         text: 'Amount'
       },
       labels: {
-        formatter: function(this: ChartContext): string {
-          return formatCurrency(this.value);
+        formatter: function(this: AxisFormatterContext): string {
+          return formatCurrency(Number(this.value));
         }
       }
     },
     tooltip: {
-      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-      pointFormatter: function(this: ChartPoint): string {
-        return '<tr><td style="color:' + this.color + 
-               ';padding:0">' + this.series.name + ': </td>' +
-               '<td style="padding:0"><b>' + formatCurrency(this.y) + '</b></td></tr>';
+      headerFormat: '<b>{point.key}</b><br/>',
+      pointFormatter: function(): string {
+        const point = this as unknown as { y: number; series: { name: string } };
+        return point.series.name + ': <b>' + formatCurrency(point.y) + '</b>';
       },
-      footerFormat: '</table>',
       shared: true,
       useHTML: true
     },
