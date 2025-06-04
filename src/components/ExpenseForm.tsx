@@ -23,7 +23,7 @@ export default function ExpenseForm() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-2xl shadow-xl border border-gray-200">
+    <div className="h-full p-6 bg-white rounded-2xl shadow-xl border border-gray-200">
       <h2 className="text-2xl font-bold text-center text-indigo-700 mb-2">
         Expense Registration
       </h2>
@@ -31,7 +31,7 @@ export default function ExpenseForm() {
         Enter the expenses by Category
       </p>
 
-      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <label
             htmlFor="category"

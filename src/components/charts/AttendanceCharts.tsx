@@ -12,6 +12,9 @@ export default function AttendanceCharts() {
       height: '300px',
       animation: {
         duration: 1000
+      },
+      style: {
+        fontFamily: '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
       }
     },
     title: {
@@ -76,6 +79,9 @@ export default function AttendanceCharts() {
       height: '300px',
       animation: {
         duration: 1000
+      },
+      style: {
+        fontFamily: '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
       }
     },
     title: {
@@ -131,15 +137,15 @@ export default function AttendanceCharts() {
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto mt-6 p-6 bg-white rounded-2xl shadow-xl border border-gray-200 animate-fade-in">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
+    <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-6">
+      <div className="space-y-8">
+        <div className="w-full">
           <HighchartsReact
             highcharts={Highcharts}
             options={pieChartOptions}
           />
         </div>
-        <div>
+        <div className="w-full">
           <HighchartsReact
             highcharts={Highcharts}
             options={columnChartOptions}

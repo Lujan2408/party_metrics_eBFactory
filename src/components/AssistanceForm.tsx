@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAppStore } from "../stores/useAppStore";
 import AttendanceCharts from "./charts/AttendanceCharts";
+import { createPortal } from "react-dom";
 
 export default function AssistanceForm() {
   const { men, women, children, total, setMen, setWomen, setChildren } = useAppStore();
@@ -17,9 +18,20 @@ export default function AssistanceForm() {
     return ((value / total) * 100).toFixed(1) + '%'
   }
 
+  // Render charts in the designated container
+  const renderCharts = () => {
+    const chartsContainer = document.getElementById('charts-container');
+    if (!chartsContainer) return null;
+
+    return createPortal(
+      <AttendanceCharts />,
+      chartsContainer
+    );
+  }
+
   return (
-    <div className="flex flex-col gap-6">
-      <div className="max-w-md mx-auto p-6 bg-white rounded-2xl shadow-xl border border-gray-200">
+    <>
+      <div className="h-full p-6 bg-white rounded-2xl shadow-xl border border-gray-200">
         <h2 className="text-2xl font-bold text-center text-indigo-600 mb-2">
           Attendee Registration
         </h2>
@@ -94,13 +106,11 @@ export default function AssistanceForm() {
               Total of people
             </label>
             <div className="text-lg font-bold text-indigo-600">
-             
              {total === 0 ? (
               <p className="text-sm font-normal text-gray-500 text-center py-2">Start adding attendees and see the total here.</p>
              ) : (
               total
              )}
-            
             </div>
           </div>
 
@@ -115,7 +125,8 @@ export default function AssistanceForm() {
         </form>
       </div>
       
-      {showCharts && <AttendanceCharts />}
-    </div>
+      {/* Render charts using portal */}
+      {showCharts && renderCharts()}
+    </>
   );
 }
