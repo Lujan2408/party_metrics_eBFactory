@@ -1,13 +1,41 @@
+import { useState, type FormEvent } from "react"
+import { useAppStore } from "../stores/useAppStore"
+import { formatCurrency } from "../helpers/formatCurrency"
+
 export default function ExpenseForm() {
+  // 1. Obtenemos las funciones y datos del store
+  const addExpense = useAppStore((state) => state.addExpense)
+  const totalExpenses = useAppStore((state) => state.totalExpenses)
+  const expensesByCategory = useAppStore((state) => state.expensesByCategory)
+
+  // 2. Estado local para el formulario
+  const [category, setCategory] = useState("")
+  const [amount, setAmount] = useState("")
+
+  // 3. Manejador del formulario
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    
+    // Validaciones
+    // TODO : Validate with react-hook-form
+
+    // Añadir gasto y limpiar formulario
+    addExpense(category.trim(), parseFloat(amount))
+    setCategory("")
+    setAmount("")
+  }
+
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-2xl shadow-xl border border-gray-200">
       <h2 className="text-2xl font-bold text-center text-indigo-600 mb-2">
         Expense Registration
       </h2>
-      <p className="text-center text-gray-500 mb-6">Enter the expenses by Category</p>
+      <p className="text-center text-gray-500 mb-6">
+        Enter the expenses by Category
+      </p>
 
-      <form className="space-y-4">
-      <div>
+      <form className="space-y-4" onSubmit={handleSubmit}>
+        <div>
           <label
             htmlFor="category"
             className="block text-sm font-bold text-gray-700"
@@ -18,8 +46,11 @@ export default function ExpenseForm() {
             type="text"
             name="category"
             id="category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
             className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="Ej. Food, Drinks, etc."
+            required
           />
         </div>
 
@@ -38,15 +69,57 @@ export default function ExpenseForm() {
               type="number"
               name="amount"
               id="amount"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
               className="w-full pl-7 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              placeholder="0.00"
+              placeholder="0"
+              min="0"
+              step="1000"
+              required
             />
           </div>
         </div>
 
+        {/* Resumen de gastos */}
+        <div className="mt-6 p-4 bg-gray-50 rounded-xl space-y-3">
+          <div className="flex justify-between items-center border-b border-gray-200 pb-2">
+            <span className="text-sm font-medium text-gray-600">
+              Total Expenses:
+            </span>
+            <span className="text-lg font-bold text-indigo-600">
+              {formatCurrency(totalExpenses)}
+            </span>
+          </div>
+
+          {Object.entries(expensesByCategory).length > 0 ? (
+            <div className="space-y-2">
+              <h3 className="text-sm font-semibold text-gray-700">
+                Expenses by Category:
+              </h3>
+              <div className="space-y-1">
+                {Object.entries(expensesByCategory).map(([cat, total]) => (
+                  <div
+                    key={cat}
+                    className="flex justify-between items-center text-sm px-2 py-1 hover:bg-gray-100 rounded"
+                  >
+                    <span className="text-gray-600 capitalize">{cat}</span>
+                    <span className="font-medium text-gray-700">
+                      {formatCurrency(total)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <p className="text-sm text-gray-500 text-center py-2">
+              No expenses registered yet
+            </p>
+          )}
+        </div>
+
         <button
           type="submit"
-          className="w-full mt-4 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition duration-300 cursor-pointer font-bold"
+          className="w-full mt-6 bg-indigo-600 text-white py-2.5 rounded-lg hover:bg-indigo-700 transition duration-300 cursor-pointer font-bold"
         >
           Add Expense
         </button>
