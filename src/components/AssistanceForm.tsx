@@ -1,15 +1,7 @@
-import { useEffect, useState } from "react";
+import { useAppStore } from "../stores/useAppStore";
 
 export default function AssistanceForm() {
-
-  const [men, setMen] = useState(0)
-  const [women, setWomen] = useState(0)
-  const [children, setChildren] = useState(0)
-  const [total, setTotal] = useState(0)
-
-  useEffect(() => {
-    setTotal(men + women + children)
-  }, [men, women, children])
+  const { men, women, children, total, setMen, setWomen, setChildren } = useAppStore();
 
   const handleSubmit = (e : React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
@@ -38,12 +30,13 @@ export default function AssistanceForm() {
             type="number"
             name="men"
             id="men"
+            value={men > 0 ? men : 'Number of men'}
             onChange={(e) => setMen(Number(e.target.value))}
             className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="Number of men"
           />
           { men > 0 ? (
-            <p className="text-sm font-normal text-gray-500 pt-2">Percentage of men: <span className="font-bold text-indigo-600">{calculatePercentageOfPeople(men, total)}</span></p>
+            <p className="text-sm font-normal text-gray-500 pt-2">Percentage of Men: <span className="font-bold text-indigo-600">{calculatePercentageOfPeople(men, total)}</span></p>
           ) : ''}
         </div>
 
@@ -58,12 +51,13 @@ export default function AssistanceForm() {
             type="number"
             name="women"
             id="women"
+            value={women > 0 ? women : 'Number of women'}
             onChange={(e) => setWomen(Number(e.target.value))}
             className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="Number of women"
           />
           { women > 0 ? (
-            <p className="text-sm font-normal text-gray-500 pt-2">Percentage of women: <span className="font-bold text-indigo-600">{calculatePercentageOfPeople(women, total)}</span></p>
+            <p className="text-sm font-normal text-gray-500 pt-2">Percentage of Women: <span className="font-bold text-indigo-600">{calculatePercentageOfPeople(women, total)}</span></p>
           ) : ''}
         </div>
 
@@ -78,12 +72,13 @@ export default function AssistanceForm() {
             type="number"
             name="children"
             id="children"
+            value={children > 0 ? children : 'Number of children'}
             onChange={(e) => setChildren(Number(e.target.value))}
             className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="Number of children"
           />
           { children > 0 ? (
-            <p className="text-sm font-normal text-gray-500 pt-2">Percentage of children: <span className="font-bold text-indigo-600">{calculatePercentageOfPeople(children, total)}</span></p>
+            <p className="text-sm font-normal text-gray-500 pt-2">Percentage of Children: <span className="font-bold text-indigo-600">{calculatePercentageOfPeople(children, total)}</span></p>
           ) : ''}
         </div>
 
