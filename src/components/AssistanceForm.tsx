@@ -15,6 +15,10 @@ export default function AssistanceForm() {
     e.preventDefault()
   }
 
+  const calculatePercentageOfPeople = (value: number, total: number) => {
+    return ((value / total) * 100).toFixed(2) + '%'
+  }
+
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-2xl shadow-xl border border-gray-200">
       <h2 className="text-2xl font-bold text-center text-indigo-600 mb-2">
@@ -38,6 +42,9 @@ export default function AssistanceForm() {
             className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="Number of men"
           />
+          { men > 0 ? (
+            <p className="text-sm font-normal text-gray-500 pt-2">Percentage of men: <span className="font-bold text-indigo-600">{calculatePercentageOfPeople(men, total)}</span></p>
+          ) : ''}
         </div>
 
         <div>
@@ -55,6 +62,9 @@ export default function AssistanceForm() {
             className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="Number of women"
           />
+          { women > 0 ? (
+            <p className="text-sm font-normal text-gray-500 pt-2">Percentage of women: <span className="font-bold text-indigo-600">{calculatePercentageOfPeople(women, total)}</span></p>
+          ) : ''}
         </div>
 
         <div>
@@ -72,6 +82,9 @@ export default function AssistanceForm() {
             className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="Number of children"
           />
+          { children > 0 ? (
+            <p className="text-sm font-normal text-gray-500 pt-2">Percentage of children: <span className="font-bold text-indigo-600">{calculatePercentageOfPeople(children, total)}</span></p>
+          ) : ''}
         </div>
 
         <div className="pt-4 border-t border-gray-200">
@@ -79,11 +92,13 @@ export default function AssistanceForm() {
             Total of people
           </label>
           <div className="text-lg font-bold text-indigo-600">
+           
            {total === 0 ? (
-            <p className="text-gray-500 font-normal">Start adding attendees and see the total here.</p>
+            <p className="text-sm font-normal text-gray-500 text-center py-2">Start adding attendees and see the total here.</p>
            ) : (
             total
            )}
+          
           </div>
         </div>
 

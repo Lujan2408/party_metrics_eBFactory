@@ -27,7 +27,7 @@ export default function ExpenseForm() {
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-2xl shadow-xl border border-gray-200">
-      <h2 className="text-2xl font-bold text-center text-indigo-600 mb-2">
+      <h2 className="text-2xl font-bold text-center text-indigo-700 mb-2">
         Expense Registration
       </h2>
       <p className="text-center text-gray-500 mb-6">
