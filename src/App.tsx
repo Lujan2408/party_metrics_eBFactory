@@ -2,9 +2,11 @@ import AssistanceForm from "./components/AssistanceForm"
 import ExpenseForm from "./components/ExpenseForm"
 import ChartsContainer from "./components/charts/ChartsContainer"
 import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 
 function App() {
   const [activeView, setActiveView] = useState<'assistance' | 'expenses'>('assistance')
+  const [showAttendanceCharts, setShowAttendanceCharts] = useState(false)
 
   return (
     <main className="min-h-screen bg-gray-100">
@@ -41,24 +43,54 @@ function App() {
 
       {/* Main content */}
       <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left Column - Active Form */}
-          <div className="w-full lg:w-1/2">
-            {activeView === 'assistance' && (
-              <div className="h-auto">
-                <AssistanceForm />
-              </div>
-            )}
-            {activeView === 'expenses' && (
-              <div className="h-auto">
-                <ExpenseForm />
-              </div>
-            )}
+          <div className="min-h-[500px] relative">
+            <AnimatePresence mode="wait">
+              {activeView === 'assistance' && (
+                <motion.div
+                  key="assistance"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="w-full"
+                >
+                  <AssistanceForm onSubmit={() => setShowAttendanceCharts(true)} />
+                </motion.div>
+              )}
+              {activeView === 'expenses' && (
+                <motion.div
+                  key="expenses"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="w-full"
+                >
+                  <ExpenseForm />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Right Column - Charts Container */}
-          <div className="w-full lg:w-1/2">
-            <ChartsContainer activeView={activeView} />
+          <div className="min-h-[500px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeView}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="w-full h-full"
+              >
+                <ChartsContainer 
+                  activeView={activeView} 
+                  showAttendanceCharts={showAttendanceCharts}
+                />
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>

@@ -4,14 +4,24 @@ import { memo } from 'react'
 
 interface ChartsContainerProps {
   activeView: 'assistance' | 'expenses'
+  showAttendanceCharts: boolean
 }
 
-const ChartsContainer = memo(function ChartsContainer({ activeView }: ChartsContainerProps) {
+const ChartsContainer = memo(function ChartsContainer({ 
+  activeView, 
+  showAttendanceCharts 
+}: ChartsContainerProps) {
   return (
     <div className="space-y-6">
-      {/* We keep both charts mounted but hide/show them based on activeView */}
+      {/* Only show attendance charts if activeView is assistance AND showAttendanceCharts is true */}
       <div className={activeView === 'assistance' ? 'block' : 'hidden'}>
-        <AttendanceCharts />
+        {showAttendanceCharts ? (
+          <AttendanceCharts />
+        ) : (
+          <div className="text-center text-gray-500 p-6 bg-white rounded-2xl shadow-xl border border-gray-200">
+            <p>Submit the attendance form to see the charts</p>
+          </div>
+        )}
       </div>
       <div className={activeView === 'expenses' ? 'block' : 'hidden'}>
         <ExpenseCharts />
@@ -20,4 +30,4 @@ const ChartsContainer = memo(function ChartsContainer({ activeView }: ChartsCont
   )
 })
 
-export default ChartsContainer 
+export default ChartsContainer
