@@ -1,3 +1,4 @@
+// This component is used to display the charts for the attendance and expenses.
 import AttendanceCharts from './AttendanceCharts'
 import ExpenseCharts from './ExpenseCharts'
 import { memo } from 'react'
@@ -7,7 +8,6 @@ type ChartsContainerProps = {
   showAttendanceCharts: boolean
 }
 
-// This component is used to display the charts for the attendance and expenses.
 // "memo" is used to prevent unnecessary re-renders of the component. It only re-render the component when the props change.
 const ChartsContainer = memo(function ChartsContainer({ activeView, showAttendanceCharts }: ChartsContainerProps) {
   return (

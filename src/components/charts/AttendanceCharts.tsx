@@ -1,3 +1,4 @@
+// This component is only used to display the charts for the attendance.
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { useAppStore } from '../../stores/useAppStore';
