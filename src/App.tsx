@@ -1,5 +1,6 @@
 import AssistanceForm from "./components/AssistanceForm"
 import ExpenseForm from "./components/ExpenseForm"
+import ChartsContainer from "./components/charts/ChartsContainer"
 import { useState } from "react"
 
 function App() {
@@ -57,9 +58,7 @@ function App() {
 
           {/* Right Column - Charts Container */}
           <div className="w-full lg:w-1/2">
-            <div id="charts-container" className="space-y-6">
-              {/* Charts will be rendered here */}
-            </div>
+            <ChartsContainer activeView={activeView} />
           </div>
         </div>
       </div>
