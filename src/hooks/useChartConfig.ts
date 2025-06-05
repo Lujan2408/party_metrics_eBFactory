@@ -1,3 +1,4 @@
+// This hook is used to set the options for the charts for the attendance.
 import { useAppStore } from "../stores/useAppStore";
 
 export const useChartConfig = () => {
