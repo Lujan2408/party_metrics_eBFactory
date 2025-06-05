@@ -1,6 +1,6 @@
 import { useAppStore } from "../stores/useAppStore";
 
-interface AssistanceFormProps {
+type AssistanceFormProps = {
   onSubmit: () => void;
 }
 
@@ -94,11 +94,11 @@ export default function AssistanceForm({ onSubmit }: AssistanceFormProps) {
             Total of people
           </label>
           <div className="text-lg font-bold text-indigo-600">
-           {total === 0 ? (
-            <p className="text-sm font-normal text-gray-500 text-center py-2">Start adding attendees and see the total here.</p>
-           ) : (
-            total
-           )}
+            {total === 0 ? (
+              <p className="text-sm font-normal text-gray-500 text-center py-2">Start adding attendees and see the total here.</p>
+            ) : (
+              total
+            )}
           </div>
         </div>
 
