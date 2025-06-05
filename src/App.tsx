@@ -20,20 +20,20 @@ function App() {
         <div className="flex justify-center gap-4 max-w-md mx-auto">
           <button
             onClick={() => setActiveView("assistance")}
-            className={`flex-1 px-6 py-3 text-lg font-semibold rounded-lg transition-colors ${
-              activeView === "assistance"
+            className={`flex-1 px-6 py-3 text-lg font-semibold rounded-lg transition-colors 
+              ${ activeView === "assistance" 
                 ? "bg-indigo-600 text-white"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
             Attendance
           </button>
           <button
             onClick={() => setActiveView("expenses")}
-            className={`flex-1 px-6 py-3 text-lg font-semibold rounded-lg transition-colors ${
-              activeView === "expenses"
+            className={`flex-1 px-6 py-3 text-lg font-semibold rounded-lg transition-colors 
+              ${ activeView === "expenses"
                 ? "bg-indigo-600 text-white"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
             Expenses

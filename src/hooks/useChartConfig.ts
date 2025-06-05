@@ -8,14 +8,19 @@ export const useChartConfig = () => {
     chart: {
       type: 'pie',
       backgroundColor: 'transparent',
-      height: '300px'
+      height: '300px',
+      animation: {
+        duration: 1000
+      },
+      style: {
+        fontFamily: '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+      }
     },
     title: {
       text: 'Attendance Distribution',
       style: {
         color: '#4F46E5',
-        fontWeight: 'bold',
-        fontSize: '20px'
+        fontWeight: 'bold'
       }
     },
     tooltip: {
@@ -37,7 +42,10 @@ export const useChartConfig = () => {
             textOutline: 'none'
           }
         },
-        showInLegend: true
+        showInLegend: true,
+        animation: {
+          duration: 1000
+        }
       }
     },
     series: [{
@@ -67,14 +75,19 @@ export const useChartConfig = () => {
     chart: {
       type: 'column',
       backgroundColor: 'transparent',
-      height: '300px'
+      height: '300px',
+      animation: {
+        duration: 1000
+      },
+      style: {
+        fontFamily: '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+      }
     },
     title: {
       text: 'Attendance by Category',
       style: {
         color: '#4F46E5',
-        fontWeight: 'bold',
-        fontSize: '20px'
+        fontWeight: 'bold'
       }
     },
     xAxis: {
@@ -98,7 +111,10 @@ export const useChartConfig = () => {
     plotOptions: {
       column: {
         pointPadding: 0.2,
-        borderWidth: 0
+        borderWidth: 0,
+        animation: {
+          duration: 1000
+        }
       }
     },
     series: [{
@@ -111,5 +127,8 @@ export const useChartConfig = () => {
     }]
   };
 
-  return { pieChartOptions, columnChartOptions }
+  return { 
+    pieChartOptions, 
+    columnChartOptions 
+  }
 }

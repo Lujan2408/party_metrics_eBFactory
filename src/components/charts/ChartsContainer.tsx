@@ -7,6 +7,8 @@ type ChartsContainerProps = {
   showAttendanceCharts: boolean
 }
 
+// This component is used to display the charts for the attendance and expenses.
+// "memo" is used to prevent unnecessary re-renders of the component. It only re-render the component when the props change.
 const ChartsContainer = memo(function ChartsContainer({ activeView, showAttendanceCharts }: ChartsContainerProps) {
   return (
     <div className="space-y-6">
@@ -16,7 +18,7 @@ const ChartsContainer = memo(function ChartsContainer({ activeView, showAttendan
           <AttendanceCharts />
         ) : (
           <div className="text-center text-gray-500 p-6 bg-white rounded-2xl shadow-xl border border-gray-200">
-            <p>Submit the attendance form to see the charts</p>
+            <p>Start adding attendees to see the charts here.</p>
           </div>
         )}
       </div>
