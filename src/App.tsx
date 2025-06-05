@@ -15,25 +15,25 @@ function App() {
         <h1 className="text-4xl font-black text-center mb-8">
           Party <span className="text-indigo-700">Management</span> System
         </h1>
-        
+
         {/* Navigation Tabs */}
         <div className="flex justify-center gap-4 max-w-md mx-auto">
           <button
-            onClick={() => setActiveView('assistance')}
+            onClick={() => setActiveView("assistance")}
             className={`flex-1 px-6 py-3 text-lg font-semibold rounded-lg transition-colors ${
-              activeView === 'assistance'
-                ? 'bg-indigo-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              activeView === "assistance"
+                ? "bg-indigo-600 text-white"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
             Attendance
           </button>
           <button
-            onClick={() => setActiveView('expenses')}
+            onClick={() => setActiveView("expenses")}
             className={`flex-1 px-6 py-3 text-lg font-semibold rounded-lg transition-colors ${
-              activeView === 'expenses'
-                ? 'bg-indigo-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              activeView === "expenses"
+                ? "bg-indigo-600 text-white"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
             Expenses
@@ -47,7 +47,7 @@ function App() {
           {/* Left Column - Active Form */}
           <div className="min-h-[500px] relative">
             <AnimatePresence mode="wait">
-              {activeView === 'assistance' && (
+              {activeView === "assistance" && (
                 <motion.div
                   key="assistance"
                   initial={{ opacity: 0, x: -20 }}
@@ -56,10 +56,12 @@ function App() {
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   className="w-full"
                 >
-                  <AssistanceForm onSubmit={() => setShowAttendanceCharts(true)} />
+                  <AssistanceForm
+                    onSubmit={() => setShowAttendanceCharts(true)}
+                  />
                 </motion.div>
               )}
-              {activeView === 'expenses' && (
+              {activeView === "expenses" && (
                 <motion.div
                   key="expenses"
                   initial={{ opacity: 0, x: -20 }}
@@ -85,8 +87,8 @@ function App() {
                 transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="w-full h-full"
               >
-                <ChartsContainer 
-                  activeView={activeView} 
+                <ChartsContainer
+                  activeView={activeView}
                   showAttendanceCharts={showAttendanceCharts}
                 />
               </motion.div>
@@ -95,7 +97,7 @@ function App() {
         </div>
       </div>
     </main>
-  )
+  );
 }
 
 export default App

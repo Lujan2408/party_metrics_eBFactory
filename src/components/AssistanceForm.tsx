@@ -15,7 +15,7 @@ export default function AssistanceForm({ onSubmit }: AssistanceFormProps) {
   }
 
   const calculatePercentageOfPeople = (value: number, total: number) => {
-    return ((value / total) * 100).toFixed(1) + '%'
+    return ((value / total) * 100).toFixed(2) + '%'
   }
 
   return (
